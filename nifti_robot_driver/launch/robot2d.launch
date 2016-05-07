@@ -1,0 +1,5 @@
+<launch>
+	<include file="$(find nifti_robot_driver)/launch/robot_node.launch"/>
+	<include file="$(find nifti_drivers_launchers)/launch/diagnostics.launch"/>
+	<include file="$(find nifti_robot_driver)/launch/ekf2d.launch"/>
+</launch>

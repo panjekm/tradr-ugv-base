@@ -1,0 +1,12 @@
+<launch>
+
+  <arg name="cam"    default="camera_0"/>
+  <arg name="size"   default="8x6"/>
+  <arg name="square" default="0.0725"/>
+  
+  <node name="$(arg cam)_calib" pkg="camera_calibration" type="cameracalibrator.py" args="--size $(arg size) --square $(arg square)" respawn="false" output="screen">
+  	<remap from="image"  to="viz/$(arg cam)/image"/>
+  	<remap from="camera" to="viz/$(arg cam)"/>
+  </node>
+  
+</launch>

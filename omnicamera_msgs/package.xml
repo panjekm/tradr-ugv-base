@@ -1,0 +1,21 @@
+<package>
+  <name>omnicamera_msgs</name>
+  <version>1.0.0</version>
+  <description>
+    Ladybug 3 omnicamera messages.
+  </description>
+  <maintainer email="tpetricek@gmail.com">Tomas Petricek</maintainer>
+  <license>BSD</license>
+  
+  <url>http://nifti.eu</url>
+  <author>Tomas Petricek</author>
+  
+  <buildtool_depend>catkin</buildtool_depend>
+  
+  <build_depend>message_generation</build_depend>
+  <build_depend>std_msgs</build_depend>
+  
+  <run_depend>message_runtime</run_depend>
+  <run_depend>std_msgs</run_depend>
+</package>
+

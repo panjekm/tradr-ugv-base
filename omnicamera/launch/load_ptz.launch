@@ -1,0 +1,30 @@
+<launch>
+
+
+  
+  <node name="panolut_virtual_camera" pkg="nodelet" type="nodelet" args="load omnicamera/panolut_virtual_camera omnicamera_nodelet_manager" respawn="false" output="screen">
+    <!-- Setup in_width, in_height from outside. -->
+    <remap from="in"          to="omnicam/image" />
+    <remap from="out"         to="ptz/image" />
+    <remap from="camera_info" to="ptz/camera_info" />
+    <remap from="config"      to="ptz/config" />
+    <remap from="get_config"  to="ptz/get_config" />
+    
+    <param name="pano_width"  value="3200" />
+    <param name="pano_height" value="1600" />
+    <param name="alpha"       value="true" />
+    <param name="radius"      value="20" />
+    <param name="lut_format"  value="/res/lut/LUT_img_%dx%d_pano_%dx%dr%d_%s%d.png" />
+    <param name="frame_id"    value="/ptz" />
+    <param name="parent_frame_id" value="/omnicam" />
+    
+    <param name="equalize_hist"   value="false" />
+    <param name="viewport_width"  value="512" />
+    <param name="viewport_height" value="512" />
+    <param name="pan"             value="54.0" />
+    <param name="tilt"            value="0.0" />
+    <param name="horizontal_fov"  value="90.0" />
+    <param name="vertical_fov"    value="90.0" />
+  </node>
+
+</launch>

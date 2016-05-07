@@ -1,0 +1,32 @@
+<launch>
+  
+  <node name="camera1394_driver" pkg="nodelet" type="nodelet" args="load camera1394/driver omnicamera_nodelet_manager">
+    <!-- Setup video_mode, roi_width, roi_height from outside. -->
+    <param name="reset_bus_on_open"    value="true" />
+    <param name="reset_on_open"        value="true" />
+    <param name="guid"                 value="$(optenv NIFTI_OMNICAM_GUID)" />
+    <param name="frame_id"             value="/omnicam" />
+    <param name="binning_x"            value="1" />
+    <param name="binning_y"            value="1" />
+    <param name="x_offset"             value="0" />
+    <param name="y_offset"             value="0" />
+    <param name="format7_packet_size"  value="4096" />
+    <param name="format7_color_coding" value="raw8" />
+    <param name="bayer_pattern"        value="rggb" />
+    <param name="bayer_method"         value="" type="string" />
+    
+    <param name="auto_gain"            value="2" />
+    <param name="auto_shutter"         value="2" />
+    <param name="auto_exposure"        value="3" />
+    <param name="exposure"             value="384" />
+
+    <param name="auto_white_balance"   value="3" />
+    <param name="white_balance_BU"     value="512.0" />
+    <param name="white_balance_RV"     value="512.0" />
+
+    <remap from="camera/image_raw"       to="omnicam/image_raw" />
+    <remap from="camera/camera_info"     to="omnicam/camera_info" />
+    <remap from="camera/set_camera_info" to="omnicam/set_camera_info" />
+  </node>
+  
+</launch>

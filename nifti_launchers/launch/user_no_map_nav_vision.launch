@@ -1,0 +1,9 @@
+<launch>
+	
+	<!-- Launches the robot drivers -->
+	<include file="$(find nifti_drivers_launchers)/launch/ugv_complete_arm_usb_cam.launch"/>
+
+	<!-- This allows autonomous flipper control -->
+	<!-- <include file="$(find nifti_reactive_flippers_vertscan)/launch/fflip_touch.launch"/> -->
+
+</launch>

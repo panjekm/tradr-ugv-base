@@ -1,0 +1,16 @@
+<!-- Launches the robot drivers -->
+<!-- This does not launch the whole system, but only the drivers. I.e. there will be no map, which is required by the OCU. If you want to use the OCU, you must also launch mapping -->
+
+<launch>
+
+	<!-- Launches the basic drivers from ETH -->
+	<include file="$(find nifti_drivers_launchers)/launch/ugv.launch"/>
+
+	<!-- Launches the network signal monitoring -->
+	<include file="$(find monitoring)/launch/monitoring.launch"/>
+
+	<!-- Launches the arm motors, the PTU, the thermocam and the RGBD cam -->
+	<include file="$(find nifti_arm)/launch/arm.launch"/>
+	<include file="$(find openni_cam)/launch/camera.launch"/>
+	 
+</launch>

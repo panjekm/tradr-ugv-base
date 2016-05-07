@@ -1,0 +1,20 @@
+analyzers:
+  joystick:
+    type: GenericAnalyzer
+    path: Joystick
+    expected: 'robot_joy_node: Joystick Driver Status'
+    num_items: 1
+    remove_prefix: 'robot_joy_node'
+  nifti_robot_node:
+    type: GenericAnalyzer
+    path: Robot
+    find_and_remove_prefix: 'nifti_robot_node'
+    num_items: 8
+  xsens_mtig:
+    type: GenericAnalyzer
+    path: IMU
+    remove_prefix: 'mtnode'
+    contains: [
+      'Self Test',
+      'XKF Valid',
+      'GPS Fix']

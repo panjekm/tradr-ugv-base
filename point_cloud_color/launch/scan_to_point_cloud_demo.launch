@@ -1,0 +1,11 @@
+<launch>
+  <param name="/use_sim_time" value="true"/>
+  
+  <node name="rosbag_play" pkg="rosbag" type="play" args="--clock -s 0 -r 1 $(find nifti_vision_data)/20120606_prague_rail/2012-06-06-11-45-23.bag" respawn="false" output="screen"/>
+  <include file="$(find omnicamera)/launch/omnicamera_proc_compressed.launch"/>
+  <include file="$(find point_cloud_color)/launch/scan_to_point_cloud.launch"/>
+  
+  <node pkg="rviz" type="rviz" output="screen" name="$(anon rviz)" args="-d $(find point_cloud_color)/res/rviz/point_cloud_color_demo.vcg"/>
+  <param name="robot_description" command="cat $(find ocu)/media/robot_model/NIFTi.urdf"/>
+  
+</launch>

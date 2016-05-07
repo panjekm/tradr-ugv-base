@@ -1,0 +1,18 @@
+<launch>
+  <group ns="viz" clear_params="false">
+    <node name="omnicamera_nodelet_manager" pkg="nodelet" type="nodelet" args="manager" output="log">
+      <param name="num_worker_threads" value="2" type="int" />
+    </node>
+  </group>
+
+  <node name="scan_to_point_cloud" pkg="nodelet" type="nodelet" args="load point_cloud_color/scan_to_point_cloud viz/omnicamera_nodelet_manager" respawn="false" output="log">
+    <param name="target_frame"       value=""/>
+    <param name="wait_for_transform" value="0.5"/>
+    <param name="channel_options"    value="9"/>
+    <param name="scan_queue"         value="50"/>
+    <param name="point_cloud_queue"  value="50"/>
+
+    <remap from="viz/scan"  to="scan_filtered"/>
+    <remap from="viz/cloud" to="scan_point_cloud_color"/>
+  </node>
+</launch>

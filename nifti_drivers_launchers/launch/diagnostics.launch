@@ -1,0 +1,7 @@
+<launch>
+	<node pkg="diagnostic_aggregator" type="aggregator_node"
+			name="$(anon diagnostic_aggregator)">
+		<rosparam command="load"
+				file="$(find nifti_drivers_launchers)/launch/diag.yaml"/>
+	</node>
+</launch>

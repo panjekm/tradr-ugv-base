@@ -1,0 +1,56 @@
+<launch>
+ <!-- 
+  <node name="ladybug_pano_vodom" pkg="nodelet" type="nodelet" args="load omnicamera/ladybug_pano omnicamera_nodelet_manager">
+    <remap from="in" to="omnicam/image" />
+    <remap from="out" to="pano_vodom/image" />
+    
+    <param name="out_width"  value="1600" />
+    <param name="out_height" value="800" />
+    
+    <param name="omnicam_frame_id" value="/omnicam" />
+    <param name="pan"        value="54.0" />
+    <param name="frame_id"   value="/pano" />
+    <param name="alpha"      value="true" />
+    <param name="radius"     value="20" />
+    <param name="lut_format" value="/res/lut/LUT_img_%dx%d_pano_%dx%dr%d_%s%d.png" />
+  </node>
+ -->
+
+  <node pkg="nodelet" type="nodelet" output="screen" name="pano_vodom"
+    args="load virtual_camera/VirtualCameraNodelet omnicamera_nodelet_manager">
+    <param name="name" value="pano_vodom"/>
+    <remap from="virtual_camera/image" to="pano_vodom/image" />
+
+    <param name="approxDistance" value="20" />
+    <param name="viewportWidth" value="1600" />
+    <param name="viewportHeight" value="800" />
+    <param name="parentFrameId" value="/omnicam" />
+    <param name="posX" value="0" />
+    <param name="posY" value="0" />
+    <param name="posZ" value="0" />
+    <param name="pan" value="306" />
+    <param name="tilt" value="90" />
+    <param name="horizontalFov" value="90" />
+    <param name="verticalFov" value="67.5" />
+    <param name="encoding" value="bgr8" />
+    <param name="frameRate" value="6.0" />
+    <param name="model" value="spherical" />
+    <param name="synchronize" value="1" />
+
+    <param name="realCameraTopic1" value="camera_0"/>
+    <param name="realCameraTopic2" value="camera_1"/>
+    <param name="realCameraTopic3" value="camera_2"/>
+    <param name="realCameraTopic4" value="camera_3"/>
+    <param name="realCameraTopic5" value="camera_4"/>
+    <param name="realCameraTopic6" value="camera_5"/>
+
+    <param name="realCameraFrame1" value="/camera_0"/>
+    <param name="realCameraFrame2" value="/camera_1"/>
+    <param name="realCameraFrame3" value="/camera_2"/>
+    <param name="realCameraFrame4" value="/camera_3"/>
+    <param name="realCameraFrame5" value="/camera_4"/>
+    <param name="realCameraFrame6" value="/camera_5"/>
+    <!-- realCamera params are optional -->
+  </node>
+ 
+</launch>

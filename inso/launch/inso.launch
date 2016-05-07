@@ -1,0 +1,46 @@
+<launch>
+    
+    <param name="inso_gps" value="$(find inso)/logger/inso_gps" />
+    <param name="inso_odometry" value="$(find inso)/logger/inso_odometry" />
+    <param name="inso_tracks" value="$(find inso)/logger/inso_tracks" /> 
+    <param name="inso_mech" value="$(find inso)/logger/inso_mech" />
+    <param name="inso_vpa" value="$(find inso)/logger/inso_vpa" />
+    <param name="inso_magnetic" value="$(find inso)/logger/inso_magnetic" />
+    <param name="inso_logging" value="false" />
+        
+    <param name="inso_InitialAlignmentSamples" value="1500" />  		<!-- nonzero positive integer -->
+    <param name="inso_AccGyrFusion" value="2" />   			<!-- 0=no fusion, 1=weighted average, 2=filtered feedback -->
+    <param name="inso_WeightedFusionGyroscopeWeight" value="0.99" /> 	<!-- float in <0,1>, accelerometer weight is consequently (1-this) -->
+    <param name="inso_MovingAverageFilterSpan" value="1" /> 		<!-- nonzero positive integer -->
+    <param name="inso_SamplingPeriod" value="0.01" />		<!-- nonzero positive float -->
+	
+    <param name="inso_InitialLatitude" value="50.076577" />   		<!-- floats -->
+    <param name="inso_InitialLongitude" value="14.417056" />
+    <param name="inso_InitialAltitude" value="237" />
+        
+    <param name="inso_AccelerometerSF" value="[1, 0, 0; 0, 1, 0; 0, 0, 1]" />  	<!-- inertial sens. calibration matrices - MATLAB format -->
+    <param name="inso_AccelerometerMA" value="[1, 0, 0; 0, 1, 0; 0, 0, 1]" />
+    <param name="inso_AccelerometerB" value=" [ 0 ; 0 ; 0 ]" />
+    <param name="inso_GyroscopeSF" value="[1.11, 0, 0; 0, 1.09, 0; 0, 0, 1.097]" />
+    <param name="inso_GyroscopeMA" value="[1, 0, 0; 0, 1, 0; 0, 0, 1]" />
+    <param name="inso_GyroscopeB" value=" [ 0 ; 0 ; 0 ]" />
+    
+    <param name="inso_InitialYaw" value="0" /> 					<!-- if 666 or not set at all, XSENS internal yaw value used (mag. based) -->
+    <param name="inso_InternalLogged" value="true" />				<!-- true or false, logging of internal XSENS XYZ and attitude -->
+
+    <param name="inso_UseConstraints" value="false" />				<!-- Boolean, turns Odometry Constraints on -->
+    <param name="inso_StrideScale" value="1.03" />				<!-- Float, sets odometry stride length scale -->
+    <param name="inso_InitialAttitudeVariance" value="5" />			<!-- Float,degrees, variance for attitude on PP diagonal  -->
+    
+    <param name="inso_SigmaAcc" value="[0.32 ; 0.32 ; 0.32]" />			<!-- Three floats, IMU Acc. standart deviations  -->
+    <param name="inso_SigmaAng" value="[0.32 ; 0.32 ; 0.32]" />		<!-- Three floats, IMU Gyr. standart deviations  -->
+    
+    <param name="inso_AidSigmaPos" value="0.0032" />					<!-- Float, Odometry position standart deviation -->
+    <param name="inso_AidSigmaVel" value="0.0032" />					<!-- Float, Odometry velocity standart deviation -->
+    
+
+  <node name="inso" pkg="inso" type="inso" output="screen">
+	
+  </node>
+</launch>
+

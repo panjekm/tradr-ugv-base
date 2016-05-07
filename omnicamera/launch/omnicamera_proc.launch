@@ -1,0 +1,29 @@
+<launch>
+  <!--
+    Launches omnicamera processing pipeline on composite color images.
+    The topic viz/omnicam/image is used as input.
+  -->
+  
+  <group ns="viz" clear_params="false">
+
+    <node name="omnicamera_nodelet_manager" pkg="nodelet" type="nodelet" args="manager" output="screen">
+      <param name="num_worker_threads" value="12" type="int" />
+    </node>
+
+    <include file="$(find omnicamera)/launch/omnicamera_format7_mode2.launch" />
+    <include file="$(find omnicamera)/launch/load_pano.launch" />
+    <include file="$(find omnicamera)/launch/load_pano_vodom.launch" />
+    <include file="$(find omnicamera)/launch/load_lady_saw.launch" />
+    <include file="$(find omnicamera)/launch/load_ptz.launch" />
+    <include file="$(find omnicamera)/launch/load_ptz_proc.launch" />
+    
+    <!-- Comment out if too many nodelets cause problems. -->
+    <!--
+    <include file="$(find omnicamera)/launch/load_standard_views.launch" />
+    <include file="$(find omnicamera)/launch/load_rectify.launch" />
+    -->
+    
+    <node name="start_color" pkg="rostopic" type="rostopic" args="echo -n 10 omnicam/image/height" />
+  </group>
+  
+</launch>

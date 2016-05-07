@@ -1,0 +1,92 @@
+/**
+@mainpage
+@htmlinclude manifest.html
+
+The @b omnicamera package provides basic functionality for processing image captured from Ladybug 3 camera.
+
+@section launch Launch files
+
+The main launch file (which includes many others) to start Ladybug capturing:
+@code
+roslaunch omnicamera omnicamera_nodelet_manager.launch
+@endcode
+
+
+@section nodelets Nodelets
+
+@subsection pano omnicamera/ladybug_pano
+
+A nodelet stiching panorama from Ladybug 3 composite image.
+It uses pre-generated look-up tables---these must be provided for it to work.
+
+@subsubsection subscribes Subscribed topics
+- in [sensor_msgs/Image] Ladybug 3 composite image.
+
+@subsubsection publishes Published topics
+- out [sensor_msgs/Image] Stitched panorama image.
+
+@subsubsection params Parameters
+- out_width [int] Width of panorama.
+- out_height [int] Height of panorama.
+- omnicam_frame_id [str] Omnicamera frame ID.
+- pan [double] Pan of the panorama w.r.t. to omnicam frame, in degrees.
+- frame_id [str] Panorama frame ID.
+- alpha [bool] Use alpha blending? (May not be used.)
+- radius [double] Distance of projected points.
+- lut_format [str] Path format of look-up tables.
+
+@subsection vcam omnicamera/panolut_virtual_camera
+
+A nodelet rendering view from a virtual pan-tilt-zoom (PTZ) camera.
+
+@subsubsection subscribes Subscribed topics
+- in [sensor_msgs/Image] Ladybug 3 composite image.
+- config [omnicamera_msgs/VirtualCameraConfig] Virtual camera config.
+
+@subsubsection publishes Published topics
+- out [sensor_msgs/Image] Rendered image from virtual PTZ camera.
+- camera_info [sensor_msgs/CameraInfo] Camera info of the PTZ camera.
+
+@subsection offers Advertised services
+- get_config [omnicamera_msgs/VirtualCameraConfig]
+
+@subsubsection params Parameters
+- pano_width [int] Width of the panorama image used.
+- pano_height [int] Height of the panorama image used.
+- alpha [bool] Use alpha blending? (May not be used.)
+- radius [double] Distance of projected points.
+- lut_format [str] Path format of look-up tables.
+- frame_id [str] PTZ camera frame ID.
+- parent_frame_id [str] Parent frame ID.
+- equalize_hist [bool] Equalize histogram of the PTZ image?
+- viewport_width [int] Viewport vidth.
+- viewport_height [int] Viewport height.
+- pan [double] Pan of the camera w.r.t. parent frame, in degrees.
+- tilt [double] Tilt of the camera w.r.t parent frame, in degrees.
+- horizontal_fov [double] Horizontal field of view, in degrees.
+- vertical_fov [double] Vertical field of view, in degrees.
+
+
+@subsection wb omnicamera/omnicam_whitebalance
+
+A nodelet using a reference gray region to white-balance during capturing.
+It sets color correction inside the camera based on a measurement in a reference gray region.
+
+@subsubsection subscribes Subscribed topics
+- in [sensor_msgs/Image] Ladybug 3 composite image.
+
+@subsubsection params Parameters
+- vertical_startposition [double] Relative vertical start position of a gray region.
+- vertical_endposition [double] Relative vertical end position of a gray region.
+- horizontal_startposition [double] Relative horizontal start position of a gray region.
+- horizontal_endposition [double] Relative horizontal end position of a gray region.
+- wait_images [int] The number of images the nodelet waits before changing parameters.
+- cor_blue [double] Blue correction factor of the reference area, for perfect gray both should be 1.
+- cor_red [double] Red correction factor of the reference area, for perfect gray both should be 1.
+
+
+@section codeapi Code API
+
+
+
+*/

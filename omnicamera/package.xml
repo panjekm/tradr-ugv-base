@@ -1,0 +1,46 @@
+<package>
+  <name>omnicamera</name>
+  <version>1.0.0</version>
+  <description>
+    Nodes and classes to support Ladybug 3 omnicamera.
+  </description>
+  <maintainer email="tpetricek@gmail.com">Tomas Petricek</maintainer>
+  <license>BSD</license>
+  
+  <url>http://nifti.eu</url>
+  <author>Tomas Petricek</author>
+  
+  <buildtool_depend>catkin</buildtool_depend>
+  
+  <build_depend>camera_info_manager</build_depend>
+  <build_depend>camera1394</build_depend>
+  <build_depend>cv_bridge</build_depend>
+  <build_depend>image_transport</build_depend>
+  <build_depend>libopencv-dev</build_depend>
+  <build_depend>message_runtime</build_depend>
+  <build_depend>nodelet</build_depend>
+  <build_depend>omnicamera_msgs</build_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>tf</build_depend>
+  
+  <run_depend>camera_info_manager</run_depend>
+  <run_depend>camera1394</run_depend>
+  <run_depend>cv_bridge</run_depend>
+  <run_depend>image_transport</run_depend>
+  <run_depend>libopencv-dev</run_depend>
+  <run_depend>message_runtime</run_depend>
+  <run_depend>nodelet</run_depend>
+  <run_depend>omnicamera_msgs</run_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>tf</run_depend>
+  
+  <export>
+    <nodelet plugin="${prefix}/omnicamera_plugins.xml" />
+  </export>
+  
+</package>
+

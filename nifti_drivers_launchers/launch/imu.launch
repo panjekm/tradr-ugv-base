@@ -1,0 +1,8 @@
+<launch>
+	<node pkg="xsens_driver" type="mtnode.py" name="mtig_node" output="screen">
+		<param name="device" value="/dev/ttyS1"/>
+		<param name="frame_id" value="/imu"/>
+		<param name="frame_local" value="NWU"/>
+		<param name="frame_local_imu" value="NWU"/>
+	</node>
+</launch>

@@ -1,0 +1,36 @@
+<launch>
+  
+  <arg name="frame_width"  value="1616" />
+  <arg name="frame_height" value="7392" />
+  
+  <param name="camera1394_driver/video_mode"      value="format7_mode6" />
+  <param name="camera1394_driver/num_dma_buffers" value="2" />
+  <param name="camera1394_driver/roi_width"       value="$(arg frame_width)" />
+  <param name="camera1394_driver/roi_height"      value="$(arg frame_height)" />
+  
+  <!--
+    Only compressed images are published by the driver so using compressed
+    image transport is needed.
+  -->
+  <param name="image_proc_debayer/image_transport" value="compressed" />
+
+  <param name="ladybug_pano/in_width"        value="$(arg frame_width)" />
+  <param name="ladybug_pano/in_height"       value="$(arg frame_height)" />
+  <param name="ladybug_pano_vodom/in_width"  value="$(arg frame_width)" />
+  <param name="ladybug_pano_vodom/in_height" value="$(arg frame_height)" />
+
+  <param name="panolut_virtual_camera/in_width"  value="$(arg frame_width)" />
+  <param name="panolut_virtual_camera/in_height" value="$(arg frame_height)" />
+  
+  <param name="front_view/in_width"  value="$(arg frame_width)" />
+  <param name="front_view/in_height" value="$(arg frame_height)" />
+  <param name="back_view/in_width"   value="$(arg frame_width)" />
+  <param name="back_view/in_height"  value="$(arg frame_height)" />
+  <param name="left_view/in_width"   value="$(arg frame_width)" />
+  <param name="left_view/in_height"  value="$(arg frame_height)" />
+  <param name="right_view/in_width"  value="$(arg frame_width)" />
+  <param name="right_view/in_height" value="$(arg frame_height)" />
+  <param name="up_view/in_width"     value="$(arg frame_width)" />
+  <param name="up_view/in_height"    value="$(arg frame_height)" />
+
+</launch>

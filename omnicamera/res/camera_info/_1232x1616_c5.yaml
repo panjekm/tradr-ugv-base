@@ -1,0 +1,20 @@
+image_width: 1232
+image_height: 1616
+camera_name: _1232x1616_c5
+camera_matrix:
+  rows: 3
+  cols: 3
+  data: [755.01851, 0, 602.19389, 0, 754.95965, 802.92034, 0, 0, 1]
+distortion_model: plumb_bob
+distortion_coefficients:
+  rows: 1
+  cols: 5
+  data: [-0.21309, 0.03984, -0.00011, -0.00017, 0]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [1, 0, 0, 0, 1, 0, 0, 0, 1]
+projection_matrix:
+  rows: 3
+  cols: 4
+  data: [627.55096, 0, 594.90261, 0, 0, 555.57825, 802.99975, 0, 0, 0, 1, 0]

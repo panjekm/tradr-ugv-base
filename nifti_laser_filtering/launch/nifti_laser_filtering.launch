@@ -1,0 +1,12 @@
+<launch>
+    
+	<rosparam command="load" file="$(find nifti_launchers)/launch/robot.yaml"/>
+
+	<node type="nifti_laser_filtering" pkg="nifti_laser_filtering"
+			name="nifti_laser_filtering" output="screen">
+		<param name="time_offset" value="-0.025" />
+		<!--param name="eps" value="0.015"/> you can modify this inflation parameter from this point-->
+		<!--param name="min_distance" value="0.10" /-->
+		<param name="shadow_filter_min_angle" value="0.14" />
+	</node>
+</launch>

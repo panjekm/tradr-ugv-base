@@ -1,0 +1,28 @@
+<launch>
+  
+  <node name="camera_0_rect" pkg="nodelet" type="nodelet" args="load image_proc/rectify omnicamera_nodelet_manager">
+    <remap from="image_mono" to="camera_0/image" />
+    <remap from="image_rect" to="camera_0/image_rect" />
+  </node>
+  <node name="camera_1_rect" pkg="nodelet" type="nodelet" args="load image_proc/rectify omnicamera_nodelet_manager">
+    <remap from="image_mono" to="camera_1/image" />
+    <remap from="image_rect" to="camera_1/image_rect" />
+  </node>
+  <node name="camera_2_rect" pkg="nodelet" type="nodelet" args="load image_proc/rectify omnicamera_nodelet_manager">
+    <remap from="image_mono" to="camera_2/image" />
+    <remap from="image_rect" to="camera_2/image_rect" />
+  </node>
+  <node name="camera_3_rect" pkg="nodelet" type="nodelet" args="load image_proc/rectify omnicamera_nodelet_manager">
+    <remap from="image_mono" to="camera_3/image" />
+    <remap from="image_rect" to="camera_3/image_rect" />
+  </node>
+  <node name="camera_4_rect" pkg="nodelet" type="nodelet" args="load image_proc/rectify omnicamera_nodelet_manager">
+    <remap from="image_mono" to="camera_4/image" />
+    <remap from="image_rect" to="camera_4/image_rect" />
+  </node>
+  <node name="camera_5_rect" pkg="nodelet" type="nodelet" args="load image_proc/rectify omnicamera_nodelet_manager">
+    <remap from="image_mono" to="camera_5/image" />
+    <remap from="image_rect" to="camera_5/image_rect" />
+  </node>
+  
+</launch>

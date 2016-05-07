@@ -1,0 +1,18 @@
+<launch>
+  <node name="ladybug_pano" pkg="nodelet" type="nodelet" args="load omnicamera/ladybug_pano omnicamera_nodelet_manager">
+    <!-- Setup in_width, in_height from outside. -->
+    <remap from="in" to="omnicam/image" />
+    <remap from="out" to="pano/image" />
+    
+    <param name="out_width"  value="1024" />
+    <param name="out_height" value="512" />
+    
+    <param name="omnicam_frame_id" value="/omnicam" />
+    <param name="pan"        value="54.0" />
+    <param name="frame_id"   value="/pano" />
+    <param name="alpha"      value="true" />
+    <param name="radius"     value="20" />
+    <param name="lut_format" value="/res/lut/LUT_img_%dx%d_pano_%dx%dr%d_%s%d_crop.png" />
+  </node>
+</launch>
+

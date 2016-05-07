@@ -1,0 +1,29 @@
+<library path="lib/libomnicamera_plugins">
+  <class name="omnicamera/lady_saw" type="omnicamera::LadySawNodelet" base_class_type="nodelet::Nodelet">
+    <description>
+      Nodelet providing separate images from a Ladybug composite image.
+    </description>
+  </class>
+  <class name="omnicamera/ladybug_pano" type="omnicamera::LadybugPanoNodelet" base_class_type="nodelet::Nodelet">
+    <description>
+      Nodelet providing panorama stitching for the Ladybug camera.
+    </description>
+  </class>
+  <class name="omnicamera/panolut_virtual_camera" type="omnicamera::PanolutVirtualCameraNodelet" base_class_type="nodelet::Nodelet">
+    <description>
+      Nodelet providing virtual camera rendered panorama look-up tables.
+    </description>
+  </class>
+  <class name="omnicamera/bag_colour_correction" type="omnicamera::ColourCorrection" base_class_type="nodelet::Nodelet">
+    <description>
+      Nodelet providing coulour correction for the bag files
+    </description>
+    </class>
+    
+     <class name="omnicamera/omnicam_whitebalance" type="omnicamera::Whitebalancing" base_class_type="nodelet::Nodelet">
+    <description>
+      Nodelet providing Automatic white balancing of the image
+    </description>
+  </class>
+</library>
+

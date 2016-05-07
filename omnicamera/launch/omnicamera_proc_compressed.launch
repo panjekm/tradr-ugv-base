@@ -1,0 +1,17 @@
+<launch>
+  <!--
+    Launches omnicamera processing pipeline on compressed composite color images.
+    The topic viz/omnicam/image/compressed is used as input.
+  -->
+  
+  <!--
+    Images need to be republished as raw ones first, probably due to https://code.ros.org/trac/ros-pkg/ticket/4794 .
+  -->
+  <node name="republish" pkg="image_transport" type="republish" args="compressed raw">
+    <remap from="in"  to="viz/omnicam/image" />
+    <remap from="out" to="viz/omnicam/image" />
+  </node>
+  
+  <include file="$(find omnicamera)/launch/omnicamera_proc.launch"/>
+    
+</launch>

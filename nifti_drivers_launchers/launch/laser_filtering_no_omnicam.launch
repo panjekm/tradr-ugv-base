@@ -1,0 +1,4 @@
+<launch>
+	<include file="$(find nifti_laser_filtering)/launch/nifti_laser_filtering.launch"/>
+	<include file="$(find point_cloud_color)/launch/nifti_scan_to_point_cloud.launch"/>
+</launch>

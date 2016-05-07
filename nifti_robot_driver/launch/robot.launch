@@ -1,0 +1,4 @@
+<launch>
+	<include file="$(find nifti_robot_driver)/launch/robot3d.launch"/>
+	<!--include file="$(find nifti_robot_driver)/launch/robot2d.launch"/-->
+</launch>

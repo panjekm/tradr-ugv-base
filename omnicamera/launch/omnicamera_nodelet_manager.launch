@@ -1,0 +1,31 @@
+<launch>
+
+<!-- Launching the colourCorrector node, mapping changed to viz/image_cor in load_pano.launch, load_lady_saw.launch and load_ptz.launch -->
+  
+  <group ns="viz" clear_params="false">
+    <node name="omnicamera_nodelet_manager" pkg="nodelet" type="nodelet" args="manager" output="screen">
+      <param name="num_worker_threads" value="12" type="int" />
+    </node>
+    
+    <include file="$(find omnicamera)/launch/omnicamera_format7_mode2.launch" />
+    <include file="$(find omnicamera)/launch/load_capture.launch" />
+    <include file="$(find omnicamera)/launch/load_debayer.launch" />
+    <include file="$(find omnicamera)/launch/load_pano.launch" />
+    <include file="$(find omnicamera)/launch/load_lady_saw.launch" />
+    <include file="$(find omnicamera)/launch/load_ptz.launch" />
+    <include file="$(find omnicamera)/launch/load_ptz_proc.launch" />
+    <include file="$(find omnicamera)/launch/load_pano_vodom.launch" />
+    <include file="$(find omnicamera)/launch/load_white_balance.launch" />
+
+    <!-- Commented out for a while, running rectify nodelets seems to cause problems.
+    <include file="$(find omnicamera)/launch/load_standard_views.launch" />
+    <include file="$(find omnicamera)/launch/load_rectify.launch" />
+    -->
+    
+    <node name="start_raw" pkg="rostopic" type="rostopic" args="echo -n 10 omnicam/image_raw/height" />
+    <node name="start_color" pkg="rostopic" type="rostopic" args="echo -n 10 omnicam/image/height" />
+
+  </group>
+  
+  
+</launch>

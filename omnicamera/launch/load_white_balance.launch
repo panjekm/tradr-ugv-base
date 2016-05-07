@@ -1,0 +1,23 @@
+<launch>
+
+  <node name="omnicam_whitebalance" pkg="nodelet" type="nodelet" args="load omnicamera/omnicam_whitebalance omnicamera_nodelet_manager">
+  
+        <remap from="in" to="omnicam/image" />
+        
+        <!-- Positions of the reference area relative to the image size -->
+          <param name="vertical_startposition"  value="0.5" />
+        <param name="vertical_endposition"  value="0.65" />
+        <param name="horizontal_startposition"  value="0.94" />
+        <param name="horizontal_endposition"  value="1.0" />
+        
+        <!-- The number of images the nodelets waits before it changes parameters-->
+        <param name="wait_images"  value="40" />
+        
+        <!-- correction factors to get a better colour, for perfect grey both should be 1-->
+        <param name="cor_blue"  value="1.0" />
+        <param name="cor_red"  value="1.0" />
+        
+        
+  </node>
+  
+</launch>

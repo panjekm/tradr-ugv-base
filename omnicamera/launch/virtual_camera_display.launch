@@ -1,0 +1,18 @@
+<launch>
+
+  <node name="virtual_camera_display" pkg="omnicamera" type="virtual_camera_display" respawn="false" output="screen">
+  	<remap from="virtual_camera/config" to="viz/ptz/config" />
+  	<remap from="virtual_camera/image" to="viz/ptz/image" />
+  	
+  	<param name="image_transport" value="raw" />
+  	
+  	<param name="viewport_width" value="512" />
+  	<param name="viewport_height" value="512" />
+  	<param name="pan" value="54.0" />
+  	<param name="tilt" value="0.0" />
+  	<param name="horizontal_fov" value="90.0" />
+  	<param name="vertical_fov" value="90.0" />
+  	<param name="image_update_interval" value="0.0" />
+  </node>
+  
+</launch>

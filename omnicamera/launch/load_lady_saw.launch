@@ -1,0 +1,32 @@
+<launch>
+  
+  <arg name="width"  value="1232" />
+  <arg name="height" value="1616" />
+  
+  <node pkg="nodelet" type="nodelet" name="lady_saw" args="load omnicamera/lady_saw omnicamera_nodelet_manager">
+    
+    <remap from="camera/image" to="omnicam/image" />
+    
+    <remap from="camera_0/image" to="camera_0/image" />
+    <remap from="camera_1/image" to="camera_1/image" />
+    <remap from="camera_2/image" to="camera_2/image" />
+    <remap from="camera_3/image" to="camera_3/image" />
+    <remap from="camera_4/image" to="camera_4/image" />
+    <remap from="camera_5/image" to="camera_5/image" />
+    <remap from="camera_0/camera_info" to="camera_0/camera_info" />
+    <remap from="camera_1/camera_info" to="camera_1/camera_info" />
+    <remap from="camera_2/camera_info" to="camera_2/camera_info" />
+    <remap from="camera_3/camera_info" to="camera_3/camera_info" />
+    <remap from="camera_4/camera_info" to="camera_4/camera_info" />
+    <remap from="camera_5/camera_info" to="camera_5/camera_info" />
+    
+    <param name="rotate" value="true" />
+    <param name="width"  value="$(arg width)" />
+    <param name="height" value="$(arg height)" />
+    <param name="camera_name_format" value="$(optenv NIFTI_OMNICAM_GUID)_$(arg width)x$(arg height)_c%i" />
+    <param name="frame_id_format" value="/camera_%i" />
+    <param name="camera_info_url_format" value="package://omnicamera/res/camera_info/%s.yaml" />
+  </node>
+  
+</launch>
+

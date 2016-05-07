@@ -1,0 +1,12 @@
+/**
+\mainpage
+\htmlinclude manifest.html
+
+\b inso is an inertial navigation system aided by track odometry. It subscribes inertial data from the XSENS IMU installed in the NIFTi robot and velocity measurements provided by track velocity encoders. These data are fused to provide localization in the /odom tf frame. Magnetic measurements are not used, therefore roll and pitch angles are stable, yaw and position of the robot will drift with time and distance travelled.  
+
+
+\section codeapi Code API
+
+\b inso has no API in the common sense, just look into the launch file to see the constants that you can set 
+
+*/

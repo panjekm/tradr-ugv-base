@@ -1,0 +1,21 @@
+<launch>
+  
+  <node name="virtual_camera_conv" pkg="omnicamera" type="virtual_camera_conv" respawn="false" output="screen">
+  	<remap from="in"  to="viz/ptz/cmd" />     <!-- sensor_msgs/JointState -->
+  	<remap from="out" to="viz/ptz/config" />  <!-- omnicamera/VirtualCameraConfig -->
+  	
+  	<param name="mode"                  value="0" />
+  	<param name="viewport_width"        value="512" />
+  	<param name="viewport_height"       value="512" />
+  	<param name="pan"                   value="0.0" />
+  	<param name="tilt"                  value="0.0" />
+  	<param name="horizontal_fov"        value="90.0" />
+  	<param name="vertical_fov"          value="90.0" />
+  	<param name="image_update_interval" value="0.0" />
+  </node>
+  
+  <node name="pub_joint_state" pkg="rostopic" type="rostopic" args="pub -r 1 viz/ptz/cmd sensor_msgs/JointState '{position: [90, 0] }'" respawn="false" output="screen" />
+  <node name="echo_virtual_camera_config" pkg="rostopic" type="rostopic" args="echo viz/ptz/config" respawn="false" output="screen" />
+  
+</launch>
+

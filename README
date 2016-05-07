@@ -1,0 +1,6 @@
+Basic drivers and utility packages needed to use and operate the TRADR UGV.
+
+nifti_robot_driver depends on librover available as a git repository (check its README for instructions).
+inso depends on ros-hydro-xsens-driver available via apt-get
+camera1394 depends on libdc1394-22-dev available via apt-get
+point-cloud-color depends on ros-hydro-pcl-ros

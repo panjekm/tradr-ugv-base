@@ -1,0 +1,193 @@
+/**
+\mainpage
+\htmlinclude manifest.html
+
+\b nifti_robot_driver is the package containing the node to handle the
+NIFTi platform.
+It provides access to all the features of the robot through ROS messages.
+According to NIFTi policy, specific messages are defined in the \b
+nifti_robot_driver_msgs package (it's recommended that you generate its
+documentation in order to get some of the links below properly working).
+
+This package is built around the \b NiftiRobot class and launch its NiftiRobot::run()
+method.
+
+\b nifti_robot_node just instantiates this class.
+
+\section interface Commmunication interface in ROS
+
+\subsection parameters Parameters of the node
+
+The ROS node can take several parameters:
+- \a ~CAN_device (\c /dev/usb/cpc_usb0): CAN device,
+- \a ~bestInit (\c true): better initialization fo the flippers for more accuracy,
+- \a ~publish_odom_as_tf (\c false): publish \c /odom -> \c /base_link in \c /tf,
+- \a ~use_tf_for_odom (\c true): use the \c /tf transformation \c /odom -> \c
+  /base_link in order to update the odometry published on the \c /odom topic,
+- \a ~publish_joint_state_as_tf (\c false): publish the information of the
+  joints as \c /tf,
+- \a steering_efficiency (\c 0.41): parameter for the kinematic model: depends on the ground surface,
+- \a laser_angle_offset (\c 0.0 Rad): roll offset of the laser (for ETHZ it is around 4 deg),
+- \a ~watchdog_timeout (\c 1 s): timeout before cancelling velocity commands,
+- \a ~initial_current_limit (\c 1.625 A): initial limit of current for the
+  flippers,
+- \a ~odom_frame (\c /odom): name of the odometry frame,
+- \a ~robot_frame (\c /base_link): name of the robot main frame,
+- \a ~laser_frame (\c /laser): name of the laser frame,
+- \a ~omni_frame (\c /omnicam): name of the omnicam base frame,
+- \a ~imu_frame (\c /imu): name of the IMU frame,
+- \a ~initial_scanning_speed (\c 0.0 Rad/s): initial speed of the laser.
+
+\warning
+\a ~publish_odom_as_tf and \a ~publish_joint_state_as_tf are deprecated and
+remain for compatibility reasons only. You should not change their default unless
+you don't need to read this warning.
+\warning
+Changing the names of the \c /tf frames might lead to undesired side effects.
+
+\subsection topics Published topics and tfs
+The node (and class) is publishing topics and \c /tf transformations at \a loop_rate Hz.
+
+\subsubsection pub_topics Topics
+- \c /robot_status (<a
+  href="../../nifti_robot_driver_msgs/html/msg/RobotStatusStamped.html">RobotStatusStamped</a>): describes the status of the robot,
+- \c /flippers_state (<a
+  href="../../nifti_robot_driver_msgs/html/msg/FlippersStateStamped.html">FlippersStateStamped</a>): the 4
+  angles of the flippers (deprecated see below),
+- \c /currents (<a
+  href="../../nifti_robot_driver_msgs/html/msg/CurrentsStamped.html">CurrentsStamped</a>): the current reading
+  of each of the flippers in A,
+- \c /odom (<a
+  href="http://www.ros.org/doc/api/nav_msgs/html/msg/Odometry.html">nav_msgs::Odometry</a>):
+  2D odometry,
+- \c /diagnostics (<a
+  href="http://www.ros.org/doc/api/diagnostic_msgs/html/msg/DiagnosticStatus.html">diagnostic_msgs::DiagnosticStatus</a>):
+  diagnostics (see \ref diag),
+- \c /tracks_vel (<a
+  href="../../nifti_robot_driver_msgs/html/msg/TracksStamped.html">TracksStamped</a>):
+  the current tracks velocity,
+- \c /joint_states (<a
+  href="http://www.ros.org/doc/api/sensor_msgs/html/msg/JointState.html">sensor_msgs::JointState</a>):
+  current state of the joints of the robot (see \ref joints).
+
+
+\subsubsection diag Diagnostics information
+We're using <a href="http://www.ros.org/wiki/diagnostics">diagnostics</a> to
+publish general status information and level of issue. The current diagnostics
+published are:
+- \c Battery: with battery level information and general charge status,
+- an item for each controller that is in warning mode if the controller is
+  disabled (like a flipper) and that shows the status register (SR) of the ELMO
+  controller and the error/failure if applicable.
+
+
+\subsubsection pub_tf Transformations
+- \c /odom -> \c /base_link (rough 2D odometry),
+- \c /base_link -> \c /left_track and \c /right_track (based on the
+  differential configuration),
+- \c /left_track -> \c /front_left_flipper and \c /rear_left_flipper, 
+- \c /right_track -> \c /front_right_flipper and \c /rear_right_flipper, 
+- \c /base_link -> \c /laser (based on nrGetScannerAngle),
+- \c /base_link -> \c /imu (fixed),
+- \c /base_link -> \c /omnicam (fixed),
+- \c /omnicam -> \c /camera0 ... \c /camera5 (fixed).
+
+\warning
+The first transformation is published by the node itself only if \a
+~publish_odom_as_tf is set (which should not happen). Otherwise it is fused with
+IMU information and published by the \c inso node (strongly prefered).
+All other transformations are published by the node itself only if \a
+~publish_joint_state_as_tf is set (which should not happen). Otherwise, it is
+published by a \c robot_state_publisher node (strongly prefered).
+
+
+\subsubsection joints Joints
+Here is the list of joints published by \b nifti_robot_node:
+- \c left_track_j: the angle between the left track and the body of the robot,
+- \c right_track_j: the angle betweent the right track and the body of the
+  robot,
+- \c front_left_flipper_j: the angle of the front left flipper,
+- \c front_right_flipper_j: the angle of the front right flipper,
+- \c rear_left_flipper_j: the angle of the rear left flipper,
+- \c rear_right_flipper_j: the angle of the rear right flipper,
+- \c laser_j: the angle of the laser.
+
+Those joints are published in a <a
+href="http://www.ros.org/doc/api/sensor_msgs/html/msg/JointState.html">sensor_msgs::JointState</a>
+message. No effort nor velocity is published, only the \c name and \c position
+arrays are populated. This message supersedes the old \c /flippers_state topic.
+
+\subsection sub_topics Subscribed topics
+The node (and class) subscribes to a set of topics to listen to commands:
+- \c /cmd_vel (<a href="http://www.ros.org/doc/api/geometry_msgs/html/msg/Twist.html">geometry_msgs::Twist</a>): velocity command,
+- \c /enable (<a
+  href="http://www.ros.org/doc/api/std_msgs/html/msg/Bool.html">std_msgs::Bool</a>): (re)enable motors if they are in some fault state,
+- \c /flippers_cmd (<a href="../../nifti_robot_driver_msgs/html/msg/FlippersState.html">FlippersState</a>): all flippers position command,
+- \c /flipper_cmd (<a href="../../nifti_robot_driver_msgs/html/msg/FlipperCommand.html">FlipperCommand</a>):
+  individual flipper position command
+- \c /scanning_speed_cmd (<a
+  href="http://www.ros.org/doc/api/std_msgs/html/msg/Float64.html">std_msgs::Float64</a>): speed of the rolling laser,
+- \c /brake (<a
+  href="http://www.ros.org/doc/api/std_msgs/html/msg/Bool.html">std_msgs::Bool</a>): enable or disable the differential brake.
+- \c /laser_center (<a
+  href="http://www.ros.org/doc/api/std_msgs/html/msg/Bool.html">std_msgs::Bool</a>):
+  request the laser scanner to go in middle position,
+- \c /tracks_vel_cmd (<a
+  href="../../nifti_robot_driver_msgs/html/msg/Tracks.html">Tracks</a>): direct
+  tracks velocity command (experts only),
+- \c /nifti_robot_node/max_linear_speed (<a
+  href="http://www.ros.org/doc/api/std_msgs/html/msg/Float64.html">std_msgs::Float64</a>):
+  linear speed limit of the robot,
+- \c /nifti_robot_node/max_angular_speed (<a
+  href="http://www.ros.org/doc/api/std_msgs/html/msg/Float64.html">std_msgs::Float64</a>):
+  angular speed limit of the robot,
+- \c /steering_efficiency (<a
+  href="http://www.ros.org/doc/api/std_msgs/html/msg/Float64.html">std_msgs::Float64</a>):
+  steering efficiency,
+- \c /restart3d (<a
+  href="http://www.ros.org/doc/api/std_msgs/html/msg/Bool.html">std_msgs::Bool</a>):
+  request the laser scanner to reset and recalibrate,
+- \c /set_flippers_torque (<a
+  href="../../nifti_robot_driver_msgs/html/msg/FlippersTorque.html">FlippersTorque</a>):
+  change maximum torque for the front and rear flippers.
+
+
+\section simu Simulation of the NIFTi robot
+In order to test the driver without the rover, I implemented a simulation
+library (nifti_robot_simulation.c). This interface can still be used by setting the \a USE_SIMULATION
+flag to \c true in \c cmake (with \c ccmake for example).
+
+
+\section diff Differential filtering
+
+The differential angle reported by the robot is subject to noise and sometimes
+bias. \b differential_filter.py implements a steady state Kalman filter to
+remove the noise and this bias. It is initialized during the first measurements
+(typically less than 10s) to estimate both noise and bias.
+
+This node can take several parameters:
+- \a ~samples_number (\c 100): number of samples used for calibration,
+- \a ~stddev_motion (\c 0.2 deg): expected change (too high means no filtering,
+  too low means slow response to actual tracks motion).
+
+
+<!-- 
+Provide an overview of your package.
+-->
+
+
+<!-- \section codeapi Code API
+-->
+<!--
+Provide links to specific auto-generated API documentation within your
+package that is of particular interest to a reader. Doxygen will
+document pretty much every part of your code, so do your best here to
+point the reader to the actual API.
+
+If your codebase is fairly large or has different sets of APIs, you
+should use the doxygen 'group' tag to keep these APIs together. For
+example, the roscpp documentation has 'libros' group.
+-->
+
+
+*/

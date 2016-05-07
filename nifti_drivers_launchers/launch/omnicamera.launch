@@ -1,0 +1,3 @@
+<launch>
+	<include file="$(find omnicamera)/launch/omnicamera_nodelet_manager.launch"/>
+</launch>

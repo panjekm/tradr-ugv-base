@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<package>
+  <name>inso</name>
+  <version>1.0.0</version>
+  <description>Inertial navigation aided by odometry using Kalman filtering</description>
+
+  <maintainer email="kubelvla@fel.cvut.cz">Vladimir Kubelka</maintainer>
+
+
+  <license>BSD</license>
+
+
+  <url type="website">https://cw.felk.cvut.cz/wiki/misc/projects/nifti/sw/inso</url>
+
+
+  <buildtool_depend>catkin</buildtool_depend>
+  
+  <build_depend>opencv2</build_depend> 
+  <build_depend>geometry_msgs</build_depend> 
+  <build_depend>roscpp</build_depend> 
+  <build_depend>std_msgs</build_depend> 
+  <build_depend>roslib</build_depend> 
+  <build_depend>nifti_robot_driver_msgs</build_depend> 
+  <build_depend>message_generation</build_depend> 
+
+  <run_depend>opencv2</run_depend> 
+  <run_depend>geometry_msgs</run_depend> 
+  <run_depend>roscpp</run_depend> 
+  <run_depend>std_msgs</run_depend> 
+  <run_depend>xsens_driver</run_depend> 
+  <run_depend>roslib</run_depend> 
+  <run_depend>nifti_robot_driver_msgs</run_depend> 
+  <run_depend>message_runtime</run_depend>
+
+  <export>
+  </export>
+
+</package>

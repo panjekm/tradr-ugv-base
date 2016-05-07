@@ -1,0 +1,14 @@
+<launch>
+    <!--
+        Loads the image-processing nodelet for the virtual PTZ camera.
+        The nodelet loads into the omnicamera nodelet manager.
+    -->
+    <node name="ptz_image_proc" pkg="nodelet" type="nodelet" args="load nifti_image_proc/image_processing_nodelet omnicamera_nodelet_manager" output="screen">
+        <param name="min_intensity" value="0"/>
+        <param name="max_intensity" value="255"/>
+        <param name="gamma" value="1.5"/>
+        <param name="percent_saturated" value="5.0"/>
+        <remap from="image" to="ptz/image"/>
+        <remap from="processed_image" to="ptz/processed_image"/>
+    </node>
+</launch>

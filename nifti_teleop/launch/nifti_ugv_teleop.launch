@@ -1,0 +1,29 @@
+<launch>
+	<node pkg="topic_tools" type="mux" name="mux_cmd_vel"
+		args="/cmd_vel /nav/cmd_vel /teleop_ocu/cmd_vel /teleop_joy/cmd_vel /local_joy/cmd_vel" >
+		<remap from="/mux/select" to="/private/mux_cmd_vel/select" />
+		<remap from="/mux/add" to="/private/mux_cmd_vel/add" />
+		<remap from="/mux/delete" to="/private/mux_cmd_vel/delete" />
+		<remap from="/mux/list" to="/private/mux_cmd_vel/list" />
+		<remap from="/cmd_vel_select" to="/private/mux_cmd_vel/deprecated" />
+		<remap from="/mux/selected" to="/mux_cmd_vel/selected" />
+	</node>
+
+	<node pkg="nifti_teleop" type="nifti_mux_ctrl.py" name="nifti_mux_control"/>
+
+	<node pkg="joy" type="joy_node" name="robot_joy_node" >
+		<param name="dev" value="/dev/input/by-id/usb-Logitech_Logitech_Cordless_RumblePad_2-joystick" />
+		<param name="autorepeat_rate" value="10.0" />
+		<remap from="/joy" to="/local_joy/joy" />
+	</node>
+
+	<node pkg="nifti_teleop" type="nifti_teleop_joy.py"
+		name="robot_teleop_joy">
+		<remap from="/joy" to="/local_joy/joy" />
+		<param name="cmd_vel_topic" value="/local_joy/cmd_vel" />
+	</node>
+
+	<node pkg="nifti_teleop" type="nth_action.py"
+		name="nifti_teleop_helper" />
+
+</launch>

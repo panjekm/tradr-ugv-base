@@ -1,0 +1,3 @@
+<launch>
+    <param name="robot_description" command="cat $(find nifti_gui)/media/robot_model/NIFTi.urdf" />
+</launch>

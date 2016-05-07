@@ -1,0 +1,12 @@
+<launch>
+  <node name="scan_to_point_cloud" pkg="nodelet" type="nodelet" args="standalone point_cloud_color/scan_to_point_cloud" respawn="false" output="screen">
+    <param name="target_frame"       value="/odom"/>
+    <param name="wait_for_transform" value="0.5"/>
+    <param name="channel_options"    value="3"/>
+    <param name="scan_queue"         value="10"/>
+    <param name="point_cloud_queue"  value="10"/>
+  
+    <remap from="scan"  to="scan"/>
+    <remap from="cloud" to="scan_point_cloud"/>
+  </node>
+</launch>

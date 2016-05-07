@@ -1,0 +1,28 @@
+<launch>
+  <arg name="image_transport" default="compressed"/>
+
+  <node name="view_pano" pkg="image_view" type="image_view" output="screen">
+    <param name="image_transport" value="$(arg image_transport)" />    
+    <remap from="image" to="viz/pano/image"/>
+  </node>
+
+  <node name="virtual_camera_display" pkg="omnicamera" type="virtual_camera_display" respawn="false" output="screen">
+    <param name="image_transport" value="$(arg image_transport)" />
+    <remap from="virtual_camera/config" to="viz/ptz/config" />
+    <remap from="virtual_camera/image" to="viz/ptz/image" />
+  </node>
+  <node name="ptz_view" pkg="image_view" type="image_view" output="screen">
+    <param name="image_transport" value="$(arg image_transport)" />
+    <remap from="image" to="viz/ptz/image" />
+  </node>
+
+  <node name="camera_0_view" pkg="image_view" type="image_view" output="screen">
+    <param name="image_transport" value="$(arg image_transport)" />
+    <remap from="image" to="viz/camera_0/image" />
+  </node>
+  <node name="camera_4_view" pkg="image_view" type="image_view" output="screen">
+    <param name="image_transport" value="$(arg image_transport)" />
+    <remap from="image" to="viz/camera_4/image" />
+  </node>
+
+</launch>

@@ -1,0 +1,14 @@
+<launch>
+	
+	<!-- Launches the robot drivers for the Bluebotics hardware (not the bullet, not the arm) -->
+        <!-- Launches the laser driver (no processing) -->
+        <!-- Produces the feed for the omnicam and virtual PTZ (no detection) -->
+        <!-- Launches the IMU drivers (and related diagnostics) -->
+	<include file="$(find nifti_drivers_launchers)/launch/ugv_complete_arm_usb_cam.launch"/>
+
+	<include file="$(find nifti_mapping_launchers)/launch/mapAndNav.launch"/>
+
+	<!-- This allows autonomous flipper control -->
+	<!-- <include file="$(find nifti_reactive_flippers_vertscan)/launch/fflip_touch.launch"/> -->
+
+</launch>

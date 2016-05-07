@@ -1,0 +1,43 @@
+<package>
+  <name>point_cloud_color</name>
+  <version>1.0.0</version>
+  <description>
+    Package for coloring point clouds using calibrated cameras.
+  </description>
+  <maintainer email="tpetricek@gmail.com">Tomas Petricek</maintainer>
+  <license>BSD</license>
+  
+  <url>http://nifti.eu</url>
+  <author>Tomas Petricek</author>
+  
+  <buildtool_depend>catkin</buildtool_depend>
+  
+  <build_depend>cv_bridge</build_depend>
+  <build_depend>image_geometry</build_depend>
+  <build_depend>image_transport</build_depend>
+  <build_depend>laser_geometry</build_depend>
+  <build_depend>libopencv-dev</build_depend>
+  <build_depend>libpcl-all-dev</build_depend>
+  <build_depend>nodelet</build_depend>
+  <build_depend>pcl_conversions</build_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>tf</build_depend>
+..
+  <run_depend>cv_bridge</run_depend>
+  <run_depend>image_geometry</run_depend>
+  <run_depend>image_transport</run_depend>
+  <run_depend>laser_geometry</run_depend>
+  <run_depend>libopencv</run_depend>
+  <run_depend>libpcl-all</run_depend>
+  <run_depend>nodelet</run_depend>
+  <run_depend>pcl_conversions</run_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+  <run_depend>tf</run_depend>
+  
+  <export>
+    <nodelet plugin="${prefix}/point_cloud_color_plugins.xml" />
+  </export>
+</package>
+

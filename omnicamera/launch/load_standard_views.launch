@@ -1,0 +1,133 @@
+<launch>
+  
+  <node name="front_view" pkg="nodelet" type="nodelet" args="load omnicamera/panolut_virtual_camera omnicamera_nodelet_manager" respawn="false" output="screen">
+    <!-- Setup in_width, in_height from outside. -->
+    <remap from="in"          to="omnicam/image" />
+    <remap from="out"         to="front/image" />
+    <remap from="camera_info" to="front/camera_info" />
+    <remap from="config"      to="front/config" />
+    <remap from="get_config"  to="front/get_config" />
+    
+    <param name="image_transport" value="raw" type="string" />
+    
+    <param name="pano_width"  value="3200" />
+    <param name="pano_height" value="1600" />
+    <param name="alpha"       value="true" />
+    <param name="radius"      value="20" />
+    <param name="lut_path"    value="$(find omnicamera)/res/lut/LUT_img_%dx%d_pano_%dx%dr%d_%s%d.png" />
+    <param name="frame_id"    value="front" />
+    <param name="parent_frame_id" value="omnicam" />
+    
+    <param name="viewport_width"  value="512" />
+    <param name="viewport_height" value="512" />
+    <param name="pan"             value="54.0" />
+    <param name="tilt"            value="0.0" />
+    <param name="horizontal_fov"  value="90.0" />
+    <param name="vertical_fov"    value="90.0" />
+  </node>
+  
+  <node name="back_view" pkg="nodelet" type="nodelet" args="load omnicamera/panolut_virtual_camera omnicamera_nodelet_manager" respawn="false" output="screen">
+    <!-- Setup in_width, in_height from outside. -->
+    <remap from="in"          to="omnicam/image" />
+    <remap from="out"         to="back/image" />
+    <remap from="camera_info" to="back/camera_info" />
+    <remap from="config"      to="back/config" />
+    <remap from="get_config"  to="back/get_config" />
+    
+    <param name="image_transport" value="raw" type="string" />
+    
+    <param name="pano_width"  value="3200" />
+    <param name="pano_height" value="1600" />
+    <param name="alpha"       value="true" />
+    <param name="radius"      value="20" />
+    <param name="lut_path"    value="$(find omnicamera)/res/lut/LUT_img_%dx%d_pano_%dx%dr%d_%s%d.png" />
+    <param name="frame_id"    value="back" />
+    <param name="parent_frame_id" value="omnicam" />
+    
+    <param name="viewport_width"  value="512" />
+    <param name="viewport_height" value="512" />
+    <param name="pan"             value="234.0" />
+    <param name="tilt"            value="0.0" />
+    <param name="horizontal_fov"  value="90.0" />
+    <param name="vertical_fov"    value="90.0" />
+  </node>
+  
+  <node name="left_view" pkg="nodelet" type="nodelet" args="load omnicamera/panolut_virtual_camera omnicamera_nodelet_manager" respawn="false" output="screen">
+    <!-- Setup in_width, in_height from outside. -->
+    <remap from="in"          to="omnicam/image" />
+    <remap from="out"         to="left/image" />
+    <remap from="camera_info" to="left/camera_info" />
+    <remap from="config"      to="left/config" />
+    <remap from="get_config"  to="left/get_config" />
+    
+    <param name="image_transport" value="raw" type="string" />
+    
+    <param name="pano_width"  value="3200" />
+    <param name="pano_height" value="1600" />
+    <param name="alpha"       value="true" />
+    <param name="radius"      value="20" />
+    <param name="lut_path"    value="$(find omnicamera)/res/lut/LUT_img_%dx%d_pano_%dx%dr%d_%s%d.png" />
+    <param name="frame_id"    value="back" />
+    <param name="parent_frame_id" value="omnicam" />
+    
+    <param name="viewport_width"  value="512" />
+    <param name="viewport_height" value="512" />
+    <param name="pan"             value="144.0" />
+    <param name="tilt"            value="0.0" />
+    <param name="horizontal_fov"  value="90.0" />
+    <param name="vertical_fov"    value="90.0" />
+  </node>
+  
+  <node name="right_view" pkg="nodelet" type="nodelet" args="load omnicamera/panolut_virtual_camera omnicamera_nodelet_manager" respawn="false" output="screen">
+    <!-- Setup in_width, in_height from outside. -->
+    <remap from="in"          to="omnicam/image" />
+    <remap from="out"         to="right/image" />
+    <remap from="camera_info" to="right/camera_info" />
+    <remap from="config"      to="right/config" />
+    <remap from="get_config"  to="right/get_config" />
+    
+    <param name="image_transport" value="raw" type="string" />
+    
+    <param name="pano_width"  value="3200" />
+    <param name="pano_height" value="1600" />
+    <param name="alpha"       value="true" />
+    <param name="radius"      value="20" />
+    <param name="lut_path"    value="$(find omnicamera)/res/lut/LUT_img_%dx%d_pano_%dx%dr%d_%s%d.png" />
+    <param name="frame_id"    value="right" />
+    <param name="parent_frame_id" value="omnicam" />
+    
+    <param name="viewport_width"  value="512" />
+    <param name="viewport_height" value="512" />
+    <param name="pan"             value="324.0" />
+    <param name="tilt"            value="0.0" />
+    <param name="horizontal_fov"  value="90.0" />
+    <param name="vertical_fov"    value="90.0" />
+  </node>
+  
+  <node name="up_view" pkg="nodelet" type="nodelet" args="load omnicamera/panolut_virtual_camera omnicamera_nodelet_manager" respawn="false" output="screen">
+    <!-- Setup in_width, in_height from outside. -->
+    <remap from="in"          to="omnicam/image" />
+    <remap from="out"         to="up/image" />
+    <remap from="camera_info" to="up/camera_info" />
+    <remap from="config"      to="up/config" />
+    <remap from="get_config"  to="up/get_config" />
+    
+    <param name="image_transport" value="raw" type="string" />
+    
+    <param name="pano_width"  value="3200" />
+    <param name="pano_height" value="1600" />
+    <param name="alpha"       value="true" />
+    <param name="radius"      value="20" />
+    <param name="lut_path"    value="$(find omnicamera)/res/lut/LUT_img_%dx%d_pano_%dx%dr%d_%s%d.png" />
+    <param name="frame_id"    value="right" />
+    <param name="parent_frame_id" value="omnicam" />
+    
+    <param name="viewport_width"  value="512" />
+    <param name="viewport_height" value="512" />
+    <param name="pan"             value="54.0" />
+    <param name="tilt"            value="90.0" />
+    <param name="horizontal_fov"  value="90.0" />
+    <param name="vertical_fov"    value="90.0" />
+  </node>
+  
+</launch>

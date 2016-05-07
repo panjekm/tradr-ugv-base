@@ -1,0 +1,24 @@
+<launch>
+
+	<!-- Launches the robot drivers for the Bluebotics hardware (not the bullet, not the arm) -->
+	<include file="$(find nifti_drivers_launchers)/launch/robot.launch"/>
+
+	<!-- Launches the laser driver (no processing) -->
+        <!-- Produces the feed for the omnicam and virtual PTZ (no detection) -->
+	<include file="$(find nifti_drivers_launchers)/launch/laser_omnicam.launch"/>
+
+	<!-- Launches the IMU drivers (and related diagnostics) -->
+	<include file="$(find nifti_drivers_launchers)/launch/imu.launch"/> 
+
+	<include file="$(find monitoring)/launch/monitoring.launch"/>
+
+	<!-- Launches the arm motors, the PTU, and the USB cam -->
+	<include file="$(find nifti_launchers)/launch/arm_and_cam.launch"/>
+	
+	<!-- Launches the minimal set-up for mapping use for an end-user -->
+	<include file="$(find nifti_mapping_launchers)/launch/mappingForOCU.launch"/>
+
+        <!-- This allows autonomous flipper control -->
+	<!-- <include file="$(find nifti_reactive_flippers_vertscan)/launch/fflip_touch.launch"/> -->
+
+</launch>

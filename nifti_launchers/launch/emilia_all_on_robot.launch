@@ -1,0 +1,26 @@
+<launch>
+
+	<!-- Launches the robot drivers for the Bluebotics hardware (not the bullet, not the arm) -->	
+	<!-- Launches the laser driver (no processing) -->
+	<!-- Produces the feed for the omnicam and virtual PTZ (no detection) -->
+	<!-- Launches the IMU drivers (and related diagnostics) -->
+	<!-- Launches the joystic listener and MUX -->
+	<include file="$(find nifti_drivers_launchers)/launch/ugv.launch"/> 
+
+	<include file="$(find monitoring)/launch/monitoring.launch"/>
+
+	<!-- Add the arm code when it's ready -->
+	
+	<!-- This forwards /scan to /scan2d -->
+	<include file="$(find nifti_mapping_launchers)/launch/nifti_laser_assembler.launch"/>
+
+	<!-- This produces the map and gives the /map TF -->
+	<include file="$(find nifti_mapping_launchers)/launch/map2d.launch"/>
+
+	<!-- This produces traveled path -->
+	<include file="$(find nifti_mapping_launchers)/launch/tf_to_path_converter.launch"/>
+
+        <!-- This allows autonomous flipper control -->
+	<include file="$(find nifti_reactive_flippers_vertscan)/launch/fflip_touch.launch"/>
+
+</launch>
